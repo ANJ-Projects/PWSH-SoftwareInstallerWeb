@@ -125,22 +125,22 @@ $content = @"
 <html>
 <head>
 <style>
-#customers {
+#softwaretable {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
 
-#customers td, #customers th {
+#softwaretable td, #softwaretable th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-#customers tr:nth-child(even){background-color: #f2f2f2;}
+#softwaretable tr:nth-child(even){background-color: #f2f2f2;}
 
-#customers tr:hover {background-color: #ddd;}
+#softwaretable tr:hover {background-color: #ddd;}
 
-#customers th {
+#softwaretable th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
@@ -153,13 +153,39 @@ $content = @"
 
 <h1>Software</h1>
 
-<table id='customers'>
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for software.." title="Type in a software">
+
+<table id='softwaretable'>
   <tr>
     <th>Name</th>
     <th>Winget Name</th>
     <th>Program Path</th>
     <th>Start buttom</th>
   </tr>
+
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("softwaretable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+
+
+
 "@
 
 $htmltable = @"
