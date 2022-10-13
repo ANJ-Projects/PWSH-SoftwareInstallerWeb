@@ -20,3 +20,5 @@ winget install $($software.winget)
 Start-Process -FilePath "$($software.programstartpath)"
 }
 "@
+
+}

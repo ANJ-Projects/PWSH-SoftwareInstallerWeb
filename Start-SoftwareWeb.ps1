@@ -8,7 +8,7 @@
 $http = [System.Net.HttpListener]::new() 
 
 # Hostname and port to listen on
-$WebServerIP = 'http://localhost:8082'
+$WebServerIP = 'http://localhost:8060'
 $http.Prefixes.Add("$WebServerIP/")
 
 
@@ -18,7 +18,6 @@ $http.Start()
 # Dot source IP Monitoring Script
 Set-Location -Path $PSScriptRoot
 . ".\Add-EditHTML.ps1"
-. ".\Add-IPMonitoringHTML.ps1"
 . ".\New-PHDashboard.ps1"
 
 
@@ -50,13 +49,50 @@ while ($http.IsListening) {
         # We can log the request to the terminal
         write-host "$($context.Request.UserHostAddress)  =>  $($context.Request.Url)" -f 'mag'
 
-        # the html/data you want to send to the browser
-        # you could replace this with: [string]$html = Get-Content "C:\some\path\index.html" -Raw
-        #[string]$html = "
-        #<!DOCTYPE html>
-        #<h1>A Powershell Webserver</h1><p>home page</p>"
-        Add-IPMonitoringHTML
-        [string]$html = Get-Content ".\index.html" -Raw
+        Add-EditHTML
+        [string]$html = Get-Content ".\edit.html" -Raw
+        
+        
+        #resposed to the request
+        $buffer = [System.Text.Encoding]::UTF8.GetBytes($html) # convert htmtl to bytes
+        $context.Response.ContentLength64 = $buffer.Length
+        $context.Response.OutputStream.Write($buffer, 0, $buffer.Length) #stream to broswer
+        $context.Response.OutputStream.Close() # close the response
+    
+    }
+
+    # ROUTE VIEW HTML
+    # http://127.0.0.1/
+    if ($context.Request.HttpMethod -eq 'GET' -and $context.Request.RawUrl -like '/Start-*') {
+
+        # We can log the request to the terminal
+        write-host "$($context.Request.UserHostAddress)  =>  $($context.Request.Url)" -f 'mag'
+
+        Add-EditHTML
+        [string]$html = Get-Content ".\edit.html" -Raw
+        Write-Host "Custom software $($context.Request.RawUrl)"
+
+        If (Test-Path -Path ".\softwarelist.csv") {
+        $softwarelist = Get-content ".\softwarelist.csv" | ConvertFrom-Csv -Delimiter ','
+        }
+        Else
+        { 
+        Write-Host 'Software text file named softwarelist.csv not found. Creating file... -f Red'
+        New-Item -ItemType File -Path ".\softwarelist.csv" -Value "Name,winget,programstartpath`r`n"
+        }
+
+        $startsoftware = $softwarelist | Where-Object -Property Startlink -Like "*$($context.Request.RawUrl)" -Verbose
+
+        if (Test-Path -Path "$($startsoftware.programstartpath)")
+        {
+        Start-Process -FilePath "$($startsoftware.programstartpath)"
+        }
+        else
+        {
+        winget install $($startsoftware.winget)
+        Start-Process -FilePath "$($startsoftware.programstartpath)"
+        }
+ 
         
         
         #resposed to the request

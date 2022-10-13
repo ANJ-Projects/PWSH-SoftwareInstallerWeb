@@ -217,12 +217,15 @@ New-Item -ItemType File -Path ".\softwarelist.csv" -Value "Name,winget,programst
 
 
 foreach ($software in $softwarelist){
+$jsfetch = @"    
+<button type="button" onclick="fetch('$($software.'StartLink')');">Start $($software.Name)</button>      
+"@
     Add-Content -Value "  <tr>" -LiteralPath .\edit.html -Force
     Add-Content -Value "<td>$($software.Name)</td>" -LiteralPath .\edit.html -Force
     Add-Content -Value "<td>$($software.winget)</td>" -LiteralPath .\edit.html -Force
     Add-Content -Value "<td>$($software.programstartpath)</td>" -LiteralPath .\edit.html -Force
-    Add-Content -Value "<td><button type='button' onclick='fetch($($software.'StartLink'));'>Start $($software.Name)</button></td>"  -LiteralPath .\edit.html -Force
-    
+    Add-Content -Value "<td>$jsfetch</td>"  -LiteralPath .\edit.html -Force
+    #Add-Content -Value "<td><button type='button' onclick='fetch($($software.'StartLink'));'>Start $($software.Name)</button></td>"  -LiteralPath .\edit.html -Force
     
     Add-Content -Value "  </tr>" -LiteralPath .\edit.html -Force    
 }
