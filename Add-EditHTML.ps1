@@ -86,20 +86,37 @@ input[type=submit]:hover {
   <form action='/send' method='post'>
   <div class="row">
     <div class="col-25">
-      <label for="ip">IP</label>
+      <label for="ip">Software Name</label>
     </div>
     <div class="col-75">
-      <input type="text" id="ip" name="ip" placeholder="Enter the IP of the server..">
+      <input type="text" id="ip" name="software" placeholder="Enter the name of the software..">
     </div>
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="name">Name</label>
+      <label for="name">Winget Name</label>
     </div>
     <div class="col-75">
-      <input type="text" id="name" name="name" placeholder="Enter the name of the software..">
+      <input type="text" id="name" name="name" placeholder="Enter the winget name of the software..">
     </div>
   </div>
+    <div class="row">
+    <div class="col-25">
+      <label for="programpath">Program Path</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="programpath" name="programpath" placeholder="Enter path to the software exe..">
+    </div>
+  </div>
+    <div class="row">
+    <div class="col-25">
+      <label for="startlink">Program Path</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="startlink" name="programpath" placeholder="Enter the url path to start the software (http://localhost:8060/Start-Softwarename)..">
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-25">
     </div>
@@ -225,7 +242,6 @@ $jsfetch = @"
     Add-Content -Value "<td>$($software.winget)</td>" -LiteralPath .\edit.html -Force
     Add-Content -Value "<td>$($software.programstartpath)</td>" -LiteralPath .\edit.html -Force
     Add-Content -Value "<td>$jsfetch</td>"  -LiteralPath .\edit.html -Force
-    #Add-Content -Value "<td><button type='button' onclick='fetch($($software.'StartLink'));'>Start $($software.Name)</button></td>"  -LiteralPath .\edit.html -Force
     
     Add-Content -Value "  </tr>" -LiteralPath .\edit.html -Force    
 }

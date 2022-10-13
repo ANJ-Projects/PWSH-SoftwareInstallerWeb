@@ -75,20 +75,37 @@ input[type=submit]:hover {
   <form action='/send' method='post'>
   <div class="row">
     <div class="col-25">
-      <label for="ip">IP</label>
+      <label for="ip">Software Name</label>
     </div>
     <div class="col-75">
-      <input type="text" id="ip" name="ip" placeholder="Enter the IP of the server..">
+      <input type="text" id="ip" name="software" placeholder="Enter the name of the software..">
     </div>
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="name">Name</label>
+      <label for="name">Winget Name</label>
     </div>
     <div class="col-75">
-      <input type="text" id="name" name="name" placeholder="Enter the name of the software..">
+      <input type="text" id="name" name="name" placeholder="Enter the winget name of the software..">
     </div>
   </div>
+    <div class="row">
+    <div class="col-25">
+      <label for="programpath">Program Path</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="programpath" name="programpath" placeholder="Enter path to the software exe..">
+    </div>
+  </div>
+    <div class="row">
+    <div class="col-25">
+      <label for="startlink">Program Path</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="startlink" name="programpath" placeholder="Enter the url path to start the software (http://localhost:8060/Start-Softwarename)..">
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-25">
     </div>
@@ -185,13 +202,13 @@ function myFunction() {
 <td>7-Zip</td>
 <td>7zip.7zip</td>
 <td>C:\Program Files\7-Zip\7zFM.exe</td>
-<td><button type="button" onclick="fetch('');">Start 7-Zip</button>      </td>
+<td><button type="button" onclick="fetch('http://localhost:8060/Start-7zip');">Start 7-Zip</button>      </td>
   </tr>
   <tr>
 <td>Github Desktop</td>
 <td>GitHub.GitHubDesktop</td>
 <td>C:\Users\$env:USERNAME\AppData\Local\GitHubDesktop\GitHubDesktop.exe</td>
-<td><button type="button" onclick="fetch('');">Start Github Desktop</button>      </td>
+<td><button type="button" onclick="fetch('http://localhost:8060/Start-GithubDesktop');">Start Github Desktop</button>      </td>
   </tr>
   <tr>
 <td>ShareX</td>
@@ -203,7 +220,7 @@ function myFunction() {
 <td>Steam</td>
 <td>Valve.Steam</td>
 <td>C:\Program Files (x86)\Steam\steam.exe</td>
-<td><button type="button" onclick="fetch('');">Start Steam</button>      </td>
+<td><button type="button" onclick="fetch('http://localhost:8060/Start-Steam');">Start Steam</button>      </td>
   </tr>
 </table>
 
