@@ -1,0 +1,7 @@
+"winget","programstartpath","Name","StartLink"
+"Notepad++.Notepad++","C:\Program Files\Notepad++\notepad++.exe","Notepad++","http://www.google.dk"
+"Google.Drive","C:\Program Files\Google\Drive File Stream\64.0.4.0\GoogleDriveFS.exe","Google Drive"
+"7zip.7zip","C:\Program Files\7-Zip\7zFM.exe","7-Zip"
+"GitHub.GitHubDesktop","C:\Users\$env:USERNAME\AppData\Local\GitHubDesktop\GitHubDesktop.exe","Github Desktop"
+" ShareX.ShareX","C:\Program Files\ShareX\ShareX.exe","ShareX"
+"Valve.Steam","C:\Program Files (x86)\Steam\steam.exe","Steam"
