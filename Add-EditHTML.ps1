@@ -110,7 +110,7 @@ input[type=submit]:hover {
   </div>
     <div class="row">
     <div class="col-25">
-      <label for="startlink">Program Path</label>
+      <label for="startlink">URL Start Link</label>
     </div>
     <div class="col-75">
       <input type="text" id="startlink" name="programpath" placeholder="Enter the url path to start the software (http://localhost:8060/Start-Softwarename)..">
